@@ -33,9 +33,9 @@ class DockerPlugin
   def output
     docker_ps = `docker ps --no-trunc`
     ps_lines = docker_ps.split("\n").map {|l| a = l.split(" "); [a[0], a[1], a[-1]]}
-    images = {}
+    names = {}
     labels = {}
-    ps_lines[1..-1].each {|p| images[p[0]] = p[2]; labels[p[0]] = p[1].gsub(/[:\/\.]/, '_') }
+    ps_lines[1..-1].each {|p| names[p[0]] = p[2]; labels[p[0]] = p[1].gsub(/[:\/\.]/, '_') }
 
     prefix_path = ''
     path_candidate = ['/host/sys/fs/cgroup', '/sys/fs/cgroup']
@@ -52,12 +52,13 @@ class DockerPlugin
     }
     
     dat = {}
-    images.each {|k,v|
+    names.each {|k,v|
       metrics.each { |metric, stat|
         content = File.open("#{prefix_path}/#{metric}/docker/#{k}/#{metric}.stat").read
         stat.each { |s|
           content =~ /#{s} (\d+)/
-          dat["docker.#{metric}."+labels[k]+"_"+images[k]+"_#{s}"] = $1.to_i
+          # dat["docker.#{metric}."+labels[k]+"_"+names[k]+"_#{s}"] = $1.to_i
+          dat["docker.#{metric}."+labels[k]+"_#{k[0,6]}_#{s}"] = $1.to_i
         }
       }
     }
