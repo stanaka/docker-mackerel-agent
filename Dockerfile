@@ -14,6 +14,8 @@ COPY mackerel-plugin-docker.rb /mackerel-plugin-docker.rb
 RUN echo [plugin.metrics.docker] >> /etc/mackerel-agent/mackerel-agent.conf
 RUN echo command = \"ruby /mackerel-plugin-docker.rb\" >> /etc/mackerel-agent/mackerel-agent.conf
 
+ADD startup.sh /startup.sh
+RUN chmod 755 /startup.sh
+
 # boot mackerel-agent
-# CMD /usr/local/bin/mackerel-agent -apikey="${apikey}" -v
-CMD /usr/local/bin/mackerel-agent -apikey="${apikey}"
+CMD ["/startup.sh"]
