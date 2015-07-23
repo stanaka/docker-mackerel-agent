@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM ubuntu:14.04
 
 # setup mackerel-agent
 RUN apt-get update \
