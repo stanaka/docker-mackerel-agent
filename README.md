@@ -13,8 +13,9 @@ docker run -h `hostname` \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /var/lib/mackerel-agent/:/var/lib/mackerel-agent/ \
   -v /proc/mounts:/host/proc/mounts:ro \
-  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-  -e 'apikey=<APIKEY>‘ \
+  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+  -e 'apikey=<APIKEY>' \
+  -d \
   mackerel/mackerel-agent
 ```
 
@@ -27,7 +28,7 @@ Here is an example for memcached.
 1. Launch memcached container, which named `memcached`
 
 ```
-docker run -d -P \ 
+docker run -d -P \
   --name memcached -p 11211:11211 \
   sylvainlasnier/memcached
 ```
@@ -49,11 +50,11 @@ docker run -h `hostname` \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /var/lib/mackerel-agent/:/var/lib/mackerel-agent/ \
   -v /proc/mounts:/host/proc/mounts:ro \
-  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro 
-  -e 'apikey=<APIKEY>‘ \
+  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+  -e 'apikey=<APIKEY>' \
   --link memcached:memcached \
-  -v /etc/mackerel-agent/conf.d:/etc/mackerel-agent/conf.d:ro
-  -e ‘include=/etc/mackerel-agent/conf.d/*' \
+  -v /etc/mackerel-agent/conf.d:/etc/mackerel-agent/conf.d:ro \
+  -e 'include=/etc/mackerel-agent/conf.d/*.conf' \
+  -d \
   mackerel/mackerel-agent
 ```
-
