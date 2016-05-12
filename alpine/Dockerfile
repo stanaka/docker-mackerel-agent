@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3.3
 
 # golang envrironment
 ENV GOPATH /go
@@ -45,8 +45,13 @@ RUN apk add --no-cache --update --virtual .mackerel-agent-build-deps \
 # SETUP remove go/src
     rm -Rf /go/src/*
 
-# SETUP add bash
-RUN apk add --no-cache bash
+# SETUP add run-deps
+RUN apk add --no-cache --virtual .mackerel-agent-run-deps \
+    bash \
+    ca-certificates \
+    iproute2 \
+    docker \
+    coreutils
 
 # SETUP startup.sh
 ADD startup.sh /startup.sh
