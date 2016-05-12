@@ -45,6 +45,9 @@ RUN apk add --no-cache --update --virtual .mackerel-agent-build-deps \
 # SETUP remove go/src
     rm -Rf /go/src/*
 
+# SETUP add bash
+RUN apk add --no-cache bash
+
 # SETUP startup.sh
 ADD startup.sh /startup.sh
 RUN chmod 755 /startup.sh
