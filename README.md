@@ -40,7 +40,7 @@ This file should be put on the host.
 ```
 % cat /etc/mackerel-agent/conf.d/memcached.conf
 [plugin.metrics.memcached]
-command = "/usr/local/bin/mackerel-plugin-memcached -host=$MEMCACHED_PORT_11211_TCP_ADDR"
+command = "/usr/bin/mackerel-plugin-memcached -host=$MEMCACHED_PORT_11211_TCP_ADDR"
 ```
 
 3. Launch mackerel-agent container linking to the memcached container.
