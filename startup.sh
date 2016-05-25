@@ -15,7 +15,7 @@ fi
 
 if [[ $enable_docker_plugin ]]; then
     echo [plugin.metrics.docker] >> /etc/mackerel-agent/mackerel-agent.conf
-    echo command = \"/usr/bin/mackerel-plugin-docker -name-format name\" >> /etc/mackerel-agent/mackerel-agent.conf
+    echo command = \"/usr/bin/mackerel-plugin-docker -method API -name-format name\" >> /etc/mackerel-agent/mackerel-agent.conf
 fi
 
 echo /usr/bin/mackerel-agent -apikey=${apikey} $opts
