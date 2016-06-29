@@ -36,7 +36,6 @@ RUN apk add --no-cache --update --virtual .mackerel-agent-build-deps \
     mv /go/src/github.com/mackerelio/go-check-plugins/build/check-* /usr/local/bin/ && \
 # SETUP clean deps go packages
     go clean -i -x -r github.com/mitchellh/gox && \
-    go clean -i -x -r github.com/golang/lint/golint && \
     go clean -i -x -r github.com/laher/goxc && \
     go clean -i -x -r github.com/pierrre/gotestcover && \
     go clean -i -x -r github.com/mattn/goveralls && \
