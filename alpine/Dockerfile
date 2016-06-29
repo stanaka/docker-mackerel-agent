@@ -31,10 +31,10 @@ RUN apk add --no-cache --update --virtual .mackerel-agent-build-deps \
       git clone https://github.com/mackerelio/go-check-plugins.git && \
     cd /go/src/github.com/mackerelio/go-check-plugins/ && \
       make build && \
-# SETUP copy build binary to /usr/local/bin
-    mv /go/src/github.com/mackerelio/mackerel-agent/build/mackerel-agent /usr/local/bin/ && \
-    mv /go/src/github.com/mackerelio/mackerel-agent-plugins/build/mackerel-plugin-* /usr/local/bin/ && \
-    mv /go/src/github.com/mackerelio/go-check-plugins/build/check-* /usr/local/bin/ && \
+# SETUP copy build binary to /usr/bin
+    mv /go/src/github.com/mackerelio/mackerel-agent/build/mackerel-agent /usr/bin/ && \
+    mv /go/src/github.com/mackerelio/mackerel-agent-plugins/build/mackerel-plugin-* /usr/bin/ && \
+    mv /go/src/github.com/mackerelio/go-check-plugins/build/check-* /usr/bin/ && \
 # SETUP clean deps go packages
     go clean -i -x -r github.com/mitchellh/gox && \
     go clean -i -x -r github.com/laher/goxc && \
