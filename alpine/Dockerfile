@@ -10,6 +10,7 @@ WORKDIR $GOPATH
 RUN apk add --no-cache --update --virtual .mackerel-agent-build-deps \
       go \
       git \
+      perl \
       build-base && \
 # SETUP mackerel-agent
     go get -d github.com/mackerelio/mackerel-agent && \
