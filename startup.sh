@@ -13,7 +13,7 @@ if [[ $auto_retirement ]]; then
     trap '/usr/bin/mackerel-agent retire -force' TERM KILL
 fi
 
-if [[ $enable_docker_plugin ]]; then
+if [[ $enable_docker_plugin ]] && ! grep "^\[plugin\.metrics\.docker\]" /etc/mackerel-agent/mackerel-agent.conf; then
     echo [plugin.metrics.docker] >> /etc/mackerel-agent/mackerel-agent.conf
     echo command = \"/usr/bin/mackerel-plugin-docker -method API -name-format name\" >> /etc/mackerel-agent/mackerel-agent.conf
 fi
