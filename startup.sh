@@ -18,6 +18,10 @@ if [[ $enable_docker_plugin ]] && ! grep "^\[plugin\.metrics\.docker\]" /etc/mac
     echo command = \"/usr/bin/mackerel-plugin-docker -method API -name-format name\" >> /etc/mackerel-agent/mackerel-agent.conf
 fi
 
+if [[ -e /var/run/mackerel-agent.pid ]]; then
+    rm -f /var/run/mackerel-agent.pid
+fi
+
 echo /usr/bin/mackerel-agent -apikey=${apikey} $opts
 /usr/bin/mackerel-agent $opts &
 wait ${!}
