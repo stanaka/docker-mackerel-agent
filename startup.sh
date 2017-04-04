@@ -19,25 +19,20 @@ command = "/usr/bin/mackerel-plugin-docker -method API -name-format name"
 EOF
 fi
 
-sig_trap() {
-    func="$1"; shift
-    for sig in "$@"; do
-        trap "$func $sig" "$sig"
-    done
-}
-
 cleanup() {
     sig="$1"
+    kill -"$sig" "$PID"
     if [ "$auto_retirement" != "" ] && [ "$auto_retirement" != "0" ]; then
         $prog retire -force $opts
     fi
-    kill -"$sig" "$PID"
 }
 
 # Propagate signals to mackerel-agent.
-sig_trap cleanup INT TERM QUIT HUP
+for sig in INT TERM QUIT HUP; do
+    trap "cleanup $sig" $sig
+done
 
 echo /usr/bin/mackerel-agent -apikey="$apikey" $opts
-/usr/bin/mackerel-agent $opts &
+$prog $opts &
 PID=$!
 wait $PID
