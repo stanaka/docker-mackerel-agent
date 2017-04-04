@@ -3,15 +3,15 @@ set -e
 
 prog=/usr/bin/mackerel-agent
 
-if [[ $apikey ]]; then
+if [ "$apikey" != "" ]; then
     $prog init -apikey=${apikey}
 fi
 
-if [[ $include ]]; then
+if [ "$include" != "" ]; then
     sed -i -e "s|# Configuration for Custom Metrics Plugins|include = \"${include}\"|" /etc/mackerel-agent/mackerel-agent.conf
 fi
 
-if [[ $enable_docker_plugin ]] && ! grep "^\[plugin\.metrics\.docker\]" /etc/mackerel-agent/mackerel-agent.conf; then
+if [ "$enable_docker_plugin" != "" ] && [ "$enable_docker_plugin" != "0"] && ! grep "^\[plugin\.metrics\.docker\]" /etc/mackerel-agent/mackerel-agent.conf; then
     echo [plugin.metrics.docker] >> /etc/mackerel-agent/mackerel-agent.conf
     echo command = \"/usr/bin/mackerel-plugin-docker -method API -name-format name\" >> /etc/mackerel-agent/mackerel-agent.conf
 fi
@@ -26,7 +26,7 @@ sig_trap() {
 
 cleanup() {
     sig="$1"
-    if [[ $auto_retirement ]]; then
+    if [ "$auto_retirement" != "" ] && [ "$auto_retirement" != "0" ]; then
         $prog retire -force $opts
     fi
     kill -$sig $PID
