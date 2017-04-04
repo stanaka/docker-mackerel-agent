@@ -82,3 +82,8 @@ docker run -h `hostname` \
 ```
 
 Note: replace `<APIKEY>` to your own apikey.
+
+## "False" value in boolean environmental variables
+
+Boolean environmental variables (`auto_retirement` and `enable_docker_plugin`) treats empty string and `0` as false, otherwise true.
+If you'd like to set false for them, pass `0` like `-e 'auto_retirement=0'` or just omit the `-e` option for them.
