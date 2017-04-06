@@ -12,7 +12,7 @@ if [ "$include" != "" ]; then
     sed -i -e "s|# Configuration for Custom Metrics Plugins|include = \"${include}\"|" $conf
 fi
 
-if [ "$enable_docker_plugin" != "" ] && [ "$enable_docker_plugin" != "0" ] && ! grep '^[plugin.metrics.docker]' $conf; then
+if [ "$enable_docker_plugin" != "" ] && [ "$enable_docker_plugin" != "0" ] && ! grep '^\[plugin\.metrics\.docker\]' $conf; then
     cat >> $conf << "EOF"
 [plugin.metrics.docker]
 command = "/usr/bin/mackerel-plugin-docker -method API -name-format name"
