@@ -13,7 +13,7 @@ docker run -h `hostname` \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /var/lib/mackerel-agent/:/var/lib/mackerel-agent/ \
   -e 'apikey=<APIKEY>' \
-  -e 'enable_docker_plugin=1 \
+  -e 'enable_docker_plugin=1' \
   -e 'opts=-v' \
   --name mackerel-agent \
   -d \
