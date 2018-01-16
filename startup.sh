@@ -32,7 +32,7 @@ for sig in INT TERM QUIT HUP; do
     trap "cleanup $sig" $sig
 done
 
-echo /usr/bin/mackerel-agent -apikey="$apikey" $opts
+echo /usr/bin/mackerel-agent -apikey="$apikey" -role="$role" $opts
 $prog $opts &
 PID=$!
 wait $PID
