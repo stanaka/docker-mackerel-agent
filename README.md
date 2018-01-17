@@ -20,6 +20,21 @@ docker run -h `hostname` \
   mackerel/mackerel-agent
 ```
 
+## Assign a role
+
+To assign a role, add `-role=<SERVICE:ROLE>` to `opts` environment variable.
+
+```
+docker run -h `hostname` \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /var/lib/mackerel-agent/:/var/lib/mackerel-agent/ \
+  -e 'apikey=<APIKEY>' \
+  -e 'opts=-v -role=<SERVICE:ROLE>' \
+  --name mackerel-agent \
+  -d \
+  mackerel/mackerel-agent
+```
+
 ## Monitor processes in other containers
 
 If you want to monitor processes on other containers, `link` option can be used.
