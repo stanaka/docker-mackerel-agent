@@ -61,10 +61,7 @@ docker run -h `hostname` \
   mackerel/mackerel-agent
 ```
 
-## Assign role and retire the host automatically
-
-If you want to assign a role to host of a mackerel-agent container on Mackerel when the container start,
-you should set `role=<SERVICE:ROLE>` as an environment variable.
+## Retire the host automatically
 
 If you want to retire a host of a mackerel-agent container on Mackerel when the container stops,
 you should set `auto_retirement=1` as an environment variable.
@@ -77,7 +74,6 @@ docker run -h `hostname` \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /var/lib/mackerel-agent/:/var/lib/mackerel-agent/ \
   -e 'apikey=<APIKEY>' \
-  -e 'role=<SERVICE:ROLE>' \
   -e 'auto_retirement=1 \
   -e 'enable_docker_plugin=1 \
   -e 'opts=-v' \
