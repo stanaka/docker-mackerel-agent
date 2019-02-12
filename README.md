@@ -14,7 +14,6 @@ docker run -h `hostname` \
   -v /var/lib/mackerel-agent/:/var/lib/mackerel-agent/ \
   -e 'apikey=<APIKEY>' \
   -e 'enable_docker_plugin=1' \
-  -e 'opts=-v' \
   --name mackerel-agent \
   -d \
   mackerel/mackerel-agent
@@ -67,7 +66,6 @@ docker run -h `hostname` \
   -v /var/lib/mackerel-agent/:/var/lib/mackerel-agent/ \
   -e 'apikey=<APIKEY>' \
   -e 'enable_docker_plugin=1 \
-  -e 'opts=-v' \
   --link memcached:memcached \
   -v /etc/mackerel-agent/conf.d:/etc/mackerel-agent/conf.d:ro \
   -e 'include=/etc/mackerel-agent/conf.d/*.conf' \
@@ -91,7 +89,6 @@ docker run -h `hostname` \
   -e 'apikey=<APIKEY>' \
   -e 'auto_retirement=1 \
   -e 'enable_docker_plugin=1 \
-  -e 'opts=-v' \
   -d \
   mackerel/mackerel-agent
 ```
